@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class analizadorParte1 {
     // Contador de identificadores
     private int contadorIdentificadores = 0;
-    
     public void Ingreso_Texto(InputStream Token){
         // Formatea Los Datos
         String[] tokens= Formatear_Datos(Token);
@@ -39,7 +38,6 @@ public class analizadorParte1 {
         String[] tokens = expresion.split("\\s+");
         return tokens;
     }
-    
     // Método para clasificar un token como identificador, operador u otro
     private static String clasificarToken(String token) {
         // Si es un identificador (asumiendo que comienza con una letra seguida de letras y/o números)
@@ -55,7 +53,7 @@ public class analizadorParte1 {
             return "Otro";
         }
     }
-    
+    //Con Numeros 
     private static String Type_with_Number(String token) {
         // Si es un identificador (asumiendo que comienza con una letra seguida de letras y/o números)
         if (token.matches("[a-zA-Z0-9]*[a-zA-Z0-9]*")) {
@@ -70,6 +68,4 @@ public class analizadorParte1 {
             return "Otro";
         }
     }
-    
-    
 }

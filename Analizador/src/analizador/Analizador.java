@@ -9,6 +9,16 @@ import java.util.Scanner;
  *
  * @author Luis Almazan
  */
+/*
+Version 2.0 Valor: 2 pts
+Alfanumnerico en id 
+Mensajes de ERROR 
+Reconocimiento de Simbolos .;$ #
+Agregar Signos de Agrupacion (),{},[].
+Mensajes "" '' / // /+
+Manejo de Errores
+*/
+
 public class Analizador {
 
     /**
