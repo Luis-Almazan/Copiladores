@@ -4,6 +4,7 @@
  */
 package analizador;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
@@ -30,16 +31,23 @@ public class analizadorParte1 {
         }
         
     }
+    
     // Metodo para Formatear Dados de un texto ingresado 
     private String[] Formatear_Datos(InputStream Token){
         Scanner scanner = new Scanner(Token);
+        scanner.useDelimiter("'|\\s+");
         String expresion = scanner.nextLine();
         // Dividir la expresión en tokens
-        String[] tokens = expresion.split("\\s+");
+        String[] tokens = expresion.split("'|\\s+");
         return tokens;
+        
     }
+    
     // Método para clasificar un token como identificador, operador u otro
     private static String clasificarToken(String token) {
+        if (token.startsWith("'") && token.endsWith("'")) {
+        return "Comentarios";
+        }
         // Si es un identificador (asumiendo que comienza con una letra seguida de letras y/o números)
         if (token.matches("[a-zA-Z][a-zA-Z0-9]*")) {
             return "Identificador";
@@ -48,11 +56,36 @@ public class analizadorParte1 {
         else if (token.matches("[+\\-*/]")) {
             return "Operador";
         }
+        else if (token.matches("[()\\[\\]{}]+")) {
+        return "Agrupacion";
+        }
+        // Todo lo que no es parte de del Alfabeto o numeros 
+        else if (token.matches("[^a-zA-Z0-9]+")) {
+        return "Simbolo";
+        }
+        // Si Son numeros
+        else if (token.matches("[0-9]+")) {
+        return "Numero";
+        }
         // Si no coincide con ninguna de las clasificaciones anteriores
         else {
-            return "Otro";
+            return "No Especificado";
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //Con Numeros 
     private static String Type_with_Number(String token) {
         // Si es un identificador (asumiendo que comienza con una letra seguida de letras y/o números)

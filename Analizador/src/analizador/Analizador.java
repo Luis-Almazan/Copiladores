@@ -11,14 +11,21 @@ import java.util.Scanner;
  */
 /*
 Version 2.0 Valor: 2 pts
-Alfanumnerico en id 
+Alfanumnerico en id Listo,
 Mensajes de ERROR 
-Reconocimiento de Simbolos .;$ #
-Agregar Signos de Agrupacion (),{},[].
-Mensajes "" '' / // /+
-Manejo de Errores
+Reconocimiento de Simbolos .;$ # LISTO
+Agregar Signos de Agrupacion (),{},[]. LISTO 
+Mensajes "" '' / // /+ #Faltaron los mensajes 
+Manejo de Errores Falto cambiar la forma en la que los muestra 
 */
 
+/*
+Version 3.0 Valor:  3pts
+ERROR EN M4$
+TOMAR COMO NUMERO 0.32
+Comentarios
+Palabras Reservadas
+*/
 public class Analizador {
 
     /**
