@@ -3,24 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package analizadorlexico2;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author Luis Almazan
  */
 public class Token {
-    
-    String dato;
-    String Type;
-    Token Next;
+    private final String type;
+    private final String value;
+    private final int lineNumber;
 
-    public Token(String dato, String Type, Token Next) {
-        this.dato = dato;
-        this.Type = Type;
-        this.Next = Next;
+    public Token(String type, String value, int lineNumber) {
+        this.type = type;
+        this.value = value;
+        this.lineNumber = lineNumber;
     }
 
-    public Token() {
+    public String getType() {
+        return type;
     }
-    
+
+    public String getValue() {
+        return value;
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + type + ": " + value + " at line " + lineNumber + "]";
+    }
 }
