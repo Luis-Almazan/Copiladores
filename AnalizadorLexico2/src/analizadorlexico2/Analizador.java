@@ -7,6 +7,23 @@ package analizadorlexico2;
 import static analizadorlexico2.LexicalAnalyzer.analyze;
 import java.util.List;
 import java.util.Scanner;
+/*
+Version 2.0 Valor: 2 pts
+Alfanumnerico en id Listo,
+Mensajes de ERROR 
+Reconocimiento de Simbolos .;$ 
+Agregar Signos de Agrupacion (),{},[]. 
+Mensajes "" '' / // /+ #LISTO 
+Manejo de Errores Falto cambiar la forma en la que los muestra 
+*/
+
+/*
+Version 3.0 Valor:  3pts
+ERROR EN M4$
+TOMAR COMO NUMERO 0.32 #LISTO
+Comentarios #LISTO
+Palabras Reservadas #LISTO
+*/
 
 /**
  *
