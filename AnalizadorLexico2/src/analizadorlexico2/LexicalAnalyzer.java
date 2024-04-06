@@ -20,7 +20,7 @@ public class LexicalAnalyzer {
     private static final String REGEX_WHITESPACE = "\\s+";
     private static final String REGEX_COMMENT = "\"(?:\\\\\"|[^\"])*\"|//.*";
 
-    private static final List<String> RESERVED_WORDS = Arrays.asList("int", "float", "if", "else", "while", "for", "return");
+    private static final List<String> RESERVED_WORDS = Arrays.asList("int", "float", "if","elseif","endif", "else", "while", "for", "return");
 
     public static List<Token> analyze(String input) {
         List<Token> tokens = new ArrayList<>();
