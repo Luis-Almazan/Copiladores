@@ -51,6 +51,13 @@ public class Analizador {
         for (Token token : tokens) {
             System.out.println(token);
         }
+        
+        // Validar la sintaxis
+        if (SyntaxAnalyzer.validate(tokens)) {
+            System.out.println("La sintaxis del código es válida.");
+        } else {
+            System.out.println("Error de sintaxis en el código.");
+        }
   
     }
 }
