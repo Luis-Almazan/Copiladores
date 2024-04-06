@@ -20,4 +20,48 @@ public class SyntaxAnalyzer {
         }
     }
     
+    public static boolean validate2(List<Token> tokens) {
+        // Variable para rastrear el índice actual mientras recorremos los tokens
+        int currentIndex = 0;
+        int tokenCount = tokens.size();
+
+        // Comenzamos con la validación del ciclo for
+        while (currentIndex < tokenCount) {
+            Token currentToken = tokens.get(currentIndex);
+
+            // Verificamos si el ciclo for comienza con la palabra clave "for"
+            if (currentToken.getValue().equals("for")) {
+                // Si encuentra un ciclo for, verifica la estructura interna
+                currentIndex++; // Avanzamos al siguiente token
+                if (currentIndex < tokenCount && tokens.get(currentIndex).getValue().equals("(")) {
+                    // Avanzamos al siguiente token
+                    currentIndex++;
+                    // Aquí validarías la estructura dentro del ciclo for, por ejemplo, variables, condiciones, etc.
+                    // Implementa tu lógica de validación aquí
+                    // Asumiendo que la estructura dentro del ciclo for es válida, avanzamos hasta el final del ciclo for
+                    while (currentIndex < tokenCount && !tokens.get(currentIndex).getValue().equals(")")) {
+                        currentIndex++;
+                    }
+                    if (currentIndex >= tokenCount) {
+                        // No se encontró el paréntesis de cierre
+                        return false;
+                    }
+                    // Si se encontró el paréntesis de cierre, avanzamos al siguiente token
+                    currentIndex++;
+                } else {
+                    // No se encontró el paréntesis de apertura
+                    return false;
+                }
+            }
+
+            // Verificamos si hay otros tipos de estructuras como while, if, etc.
+            // Implementa la lógica similar para validar otras estructuras
+
+            // Avanzamos al siguiente token
+            currentIndex++;
+        }
+
+        // Si hemos llegado hasta aquí sin encontrar ninguna discrepancia, el código es válido
+        return true;
+    }
 }
