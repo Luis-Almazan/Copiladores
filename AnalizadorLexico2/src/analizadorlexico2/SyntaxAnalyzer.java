@@ -65,12 +65,13 @@ public class SyntaxAnalyzer {
         return true;
     }
 
-    public static boolean validate3(List<Token> tokens) {
+ public static boolean validate3(List<Token> tokens) {
     int currentIndex = 0;
     int tokenCount = tokens.size();
 
     while (currentIndex < tokenCount) {
         Token currentToken = tokens.get(currentIndex);
+        System.out.println("Token actual: " + currentToken.getValue()); // Imprimir el valor del token actual
 
         if (currentToken.getValue().equals("for")) {
             // Validar la estructura del ciclo for
@@ -91,14 +92,19 @@ public class SyntaxAnalyzer {
                 return false; // Error en la estructura del condicional if
             }
         } else {
-            // Si no es ninguno de los casos anteriores, avanzar al siguiente token
-            currentIndex++;
+            // Si no es ninguno de los casos anteriores, retornar un error
+            System.out.println("Error: Token no reconocido");
+            return false;
         }
+
+        currentIndex++; // Avanzar al siguiente token
     }
 
     // Si hemos llegado hasta aquí sin encontrar ninguna discrepancia, el código es válido
     return true;
 }
+
+
 
 private static int validateFor(List<Token> tokens, int currentIndex) {
      // Verificar si hay suficientes tokens para representar la estructura del ciclo for
@@ -162,18 +168,73 @@ private static int validateFor(List<Token> tokens, int currentIndex) {
 }
 
 private static int validateWhile(List<Token> tokens, int currentIndex) {
-    // Validar la estructura del ciclo while
-    // Implementa tu lógica de validación aquí
-    // Asegúrate de devolver el índice actualizado después de la validación
-        return 0;
+      // Verificar si hay suficientes tokens para representar la estructura del ciclo while
+    if (currentIndex + 3 >= tokens.size()) {
+        return -1; // Error: No hay suficientes tokens para la estructura del ciclo while
+    }
+
+    // El ciclo while debe comenzar con la palabra clave "while"
+    if (!tokens.get(currentIndex).getValue().equals("while")) {
+        return -1; // Error: La palabra clave "while" no está presente
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Después de "while" debería haber un paréntesis de apertura "("
+    if (!tokens.get(currentIndex).getValue().equals("(")) {
+        return -1; // Error: Falta el paréntesis de apertura "("
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Validar la condición del ciclo while
+    currentIndex = validateCondition(tokens, currentIndex);
+    if (currentIndex == -1) {
+        return -1; // Error en la condición del ciclo while
+    }
+
+    // Después de la condición del ciclo while debería haber un paréntesis de cierre ")"
+    if (!tokens.get(currentIndex).getValue().equals(")")) {
+        return -1; // Error: Falta el paréntesis de cierre ")"
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Validación completa, devolver el índice actualizado
+    return currentIndex;
+
     
 }
 
 private static int validateIf(List<Token> tokens, int currentIndex) {
-    // Validar la estructura del condicional if
-    // Implementa tu lógica de validación aquí
-    // Asegúrate de devolver el índice actualizado después de la validación
-        return 0;
+    // Verificar si hay suficientes tokens para representar la estructura del condicional if
+    if (currentIndex + 3 >= tokens.size()) {
+        return -1; // Error: No hay suficientes tokens para la estructura del condicional if
+    }
+
+    // El condicional if debe comenzar con la palabra clave "if"
+    if (!tokens.get(currentIndex).getValue().equals("if")) {
+        return -1; // Error: La palabra clave "if" no está presente
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Después de "if" debería haber un paréntesis de apertura "("
+    if (!tokens.get(currentIndex).getValue().equals("(")) {
+        return -1; // Error: Falta el paréntesis de apertura "("
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Validar la condición del condicional if
+    currentIndex = validateCondition(tokens, currentIndex);
+    if (currentIndex == -1) {
+        return -1; // Error en la condición del condicional if
+    }
+
+    // Después de la condición del condicional if debería haber un paréntesis de cierre ")"
+    if (!tokens.get(currentIndex).getValue().equals(")")) {
+        return -1; // Error: Falta el paréntesis de cierre ")"
+    }
+    currentIndex++; // Avanzar al siguiente token
+
+    // Validación completa, devolver el índice actualizado
+    return currentIndex;
 }
 
 
