@@ -41,7 +41,7 @@ public class Analizador {
         AVLTreeWord avlTree = new AVLTreeWord();
 
         // TODO code application logic here
-       Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         StringBuilder inputBuilder = new StringBuilder();
         System.out.println("Ingresa el código fuente (termina con una línea en blanco):");
 
@@ -60,13 +60,13 @@ public class Analizador {
         for (Token token : tokens) {
             System.out.println(token);
             avlTree.insert(token.getValue());
+            
         }
         
-      
+        //boolean isValid = SyntaxAnalyzer.validate2(tokens);
 
         // Obtener el nodo raíz del árbol AVL
         AVLNodeWord root = avlTree.getRoot();
-
         // Crear una instancia de AVLTreeWordGraph para visualizar el árbol AVL
         AVLTreeWordGraph graph = new AVLTreeWordGraph(root);
         
@@ -77,7 +77,11 @@ public class Analizador {
             System.out.println("Error de sintaxis en el código.");
         }
   
-        
+        if (SyntaxAnalyzer.validate2(tokens)) {
+            System.out.println("El código es válido.2 ");
+        } else {
+            System.out.println("El código no es válido.2");
+        }
         
         
         

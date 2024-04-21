@@ -64,4 +64,9 @@ public class SyntaxAnalyzer {
         // Si hemos llegado hasta aquí sin encontrar ninguna discrepancia, el código es válido
         return true;
     }
+
+
+
+
+
 }
