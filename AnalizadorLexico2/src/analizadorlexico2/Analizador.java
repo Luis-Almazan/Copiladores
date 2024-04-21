@@ -77,7 +77,7 @@ public class Analizador {
             System.out.println("Error de sintaxis en el código.");
         }
   
-        if (SyntaxAnalyzer.validate2(tokens)) {
+        if (SyntaxAnalyzer.validate3(tokens)) {
             System.out.println("El código es válido.2 ");
         } else {
             System.out.println("El código no es válido.2");
