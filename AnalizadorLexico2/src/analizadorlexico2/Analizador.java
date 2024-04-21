@@ -4,6 +4,9 @@
  */
 package analizadorlexico2;
 
+import analizadorlexico2.Grafo.AVLNodeWord;
+import analizadorlexico2.Grafo.AVLTreeWord;
+import analizadorlexico2.Grafo.AVLTreeWordGraph;
 import static analizadorlexico2.LexicalAnalyzer.analyze;
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +33,13 @@ Palabras Reservadas #LISTO
  * @author Luis Almazan
  */
 public class Analizador {
+    
+    
      public static void main(String[] args) {
+          
+        // Construir un árbol AVL a partir de la lista de palabras
+        AVLTreeWord avlTree = new AVLTreeWord();
+
         // TODO code application logic here
        Scanner scanner = new Scanner(System.in);
         StringBuilder inputBuilder = new StringBuilder();
@@ -50,7 +59,16 @@ public class Analizador {
         // Imprimir los tokens encontrados
         for (Token token : tokens) {
             System.out.println(token);
+            avlTree.insert(token.getValue());
         }
+        
+      
+
+        // Obtener el nodo raíz del árbol AVL
+        AVLNodeWord root = avlTree.getRoot();
+
+        // Crear una instancia de AVLTreeWordGraph para visualizar el árbol AVL
+        AVLTreeWordGraph graph = new AVLTreeWordGraph(root);
         
         // Validar la sintaxis
         if (SyntaxAnalyzer.validate(tokens)) {
@@ -59,5 +77,27 @@ public class Analizador {
             System.out.println("Error de sintaxis en el código.");
         }
   
+        
+        
+        
+        
+        
     }
+     
+     public class Grafo{
+     
+          AVLTreeWord a =new AVLTreeWord();
+     
+          public AVLNodeWord getRoot() {
+            return a.getRoot();
+          }
+     
+     
+     
+     
+     }    
+     
+     
+     
+     
 }
