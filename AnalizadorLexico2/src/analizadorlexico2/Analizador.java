@@ -3,13 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package analizadorlexico2;
-import java.util.List;
-import analizadorlexico2.Grafo.AVLNodeWord;
-import analizadorlexico2.Grafo.AVLTreeWord;
-import analizadorlexico2.Grafo.AVLTreeWordGraph;
-import static analizadorlexico2.LexicalAnalyzer.analyze;
-import com.mxgraph.analysis.mxFibonacciHeap.Node;
-import java.util.List;
 import java.util.Scanner;
 import analizadorlexico2.Grafo.AVLTreeWord;
 import analizadorlexico2.Grafo.AVLTreeWordGraph;
@@ -60,37 +53,7 @@ public class Analizador {
         // Analizar el código fuente
         String input = inputBuilder.toString();
        // List<Token> tokens = analyze(input);
-
-        // Imprimir los tokens encontrados
-       // for (Token token : tokens) {
-       //     System.out.println(token);
-       //     avlTree.insert(token.getValue());
-            
-       // }
        
-      
-      
-      /*
-        //boolean isValid = SyntaxAnalyzer.validate2(tokens);
-
-        // Obtener el nodo raíz del árbol AVL
-        AVLNodeWord root = avlTree.getRoot();
-        // Crear una instancia de AVLTreeWordGraph para visualizar el árbol AVL
-        AVLTreeWordGraph graph = new AVLTreeWordGraph(root);
-        
-        // Validar la sintaxis
-        if (SyntaxAnalyzer.validate(tokens)) {
-            System.out.println("La sintaxis del código es válida.");
-        } else {
-            System.out.println("Error de sintaxis en el código.");
-        }
-  
-        if (SyntaxAnalyzer.validate2(tokens)) {
-            System.out.println("El código es válido.2 ");
-        } else {
-            System.out.println("El código no es válido.2");
-        }
-        */
          //String codigoFuente = "main int a = 5; float b = 3.5; if (a > 4) { a = a + 1; } ;";
          String codigoFuente = "main int a = 5; if (a > 4) { a = a + 1; } while (a < 10) { a = a + 1; } ; ";
 
@@ -134,7 +97,7 @@ public class Analizador {
         
         // Crear el analizador sintáctico y validar la lista de tokens
         //SyntaxAnalyzer syntaxAnalyzer = new SyntaxAnalyzer(tokens);
-        //boolean esValidoSintacticamente = syntaxAnalyzer.validate();
+        boolean esValidoSintacticamente = syntaxAnalyzer.validate();
         
         // Imprimir el resultado de la validación sintáctica
         System.out.println("El código es " + (esValidoSintacticamente ? "válido sintácticamente" : "inválido sintácticamente"));
