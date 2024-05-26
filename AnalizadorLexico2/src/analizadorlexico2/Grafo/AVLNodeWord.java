@@ -4,12 +4,9 @@
  */
 package analizadorlexico2.Grafo;
 
-/**
- *
- * @author Luis
- */
+
 public class AVLNodeWord {
-     private String word;
+    private String word;
     private AVLNodeWord left;
     private AVLNodeWord right;
     private int height;
@@ -46,7 +43,4 @@ public class AVLNodeWord {
     public void setHeight(int height) {
         this.height = height;
     }
-    
-    
-    
 }

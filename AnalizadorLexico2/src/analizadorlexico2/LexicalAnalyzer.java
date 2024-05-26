@@ -3,68 +3,64 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package analizadorlexico2;
-/*
-Esto es una Prueba
-*/
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-/**
- *
- * @author Luis Almazan
- */
+
 public class LexicalAnalyzer {
-   private static final String REGEX_INTEGER = "\\d+\\.?\\d*";
+    // Definir los patrones para diferentes tipos de tokens
+    private static final String REGEX_INTEGER = "\\d+";  // Solo números enteros
+    private static final String REGEX_FLOAT = "\\d+\\.\\d*";  // Números flotantes
     private static final String REGEX_IDENTIFIER = "[a-zA-Z][a-zA-Z0-9]*";
     private static final String REGEX_OPERATOR = "[+\\-*/]";
     private static final String REGEX_WHITESPACE = "\\s+";
-    private static final String REGEX_COMMENT = "\"(?:\\\\\"|[^\"])*\"|//.*";
-    private static final String REGEX_GROUPING_SYMBOLS= "[\\(\\)\\[\\]\\{\\}]";
-    private static final String REGEX_SYMBOLS = "[=<>!&|;:,@$%*]"; // Agregar otros símbolos según sea necesario
-    
-    private static final List<String> RESERVED_WORDS = Arrays.asList("int", "float", "if","elseif","endif", "else", "while", "for", "return");
+    private static final String REGEX_COMMENT = "//.*";  // Solo comentarios de línea
+    private static final String REGEX_GROUPING_SYMBOLS = "[\\(\\)\\[\\]\\{\\}]";
+    private static final String REGEX_SYMBOLS = "[=<>!&|;:,@$%*]";  // Agregar otros símbolos según sea necesario
+
+    private static final List<String> RESERVED_WORDS = Arrays.asList("int", "float", "if", "elseif", "endif", "else", "while", "for", "return","void");
+
+    // Compilar el patrón una sola vez
+    private static final String FULL_REGEX = REGEX_INTEGER + "|" + REGEX_FLOAT + "|" + REGEX_IDENTIFIER + "|" + REGEX_OPERATOR + "|" + REGEX_WHITESPACE + "|" + REGEX_COMMENT + "|" + REGEX_GROUPING_SYMBOLS + "|" + REGEX_SYMBOLS;
+    private static final Pattern PATTERN = Pattern.compile(FULL_REGEX);
 
     public static List<Token> analyze(String input) {
         List<Token> tokens = new ArrayList<>();
-        String[] lines = input.split("\n");
+        String[] lines = input.split("\\n");
 
         int lineNumber = 1;
         for (String line : lines) {
-            String regex = REGEX_INTEGER + "|" + REGEX_IDENTIFIER + "|" + REGEX_OPERATOR + "|" + REGEX_WHITESPACE + "|" + REGEX_COMMENT + "|" + REGEX_GROUPING_SYMBOLS+ "|" + REGEX_SYMBOLS;
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(line);
+            Matcher matcher = PATTERN.matcher(line);
 
             while (matcher.find()) {
                 String token = matcher.group();
                 if (token.matches(REGEX_INTEGER)) {
                     tokens.add(new Token("INTEGER", token, lineNumber));
+                } else if (token.matches(REGEX_FLOAT)) {
+                    tokens.add(new Token("FLOAT", token, lineNumber));
                 } else if (token.matches(REGEX_IDENTIFIER)) {
                     if (RESERVED_WORDS.contains(token)) {
-                        tokens.add(new Token("RESERVED_WORD", token, lineNumber));
+                        tokens.add(new Token("KEYWORD", token, lineNumber));
                     } else {
                         tokens.add(new Token("IDENTIFIER", token, lineNumber));
                     }
                 } else if (token.matches(REGEX_OPERATOR)) {
                     tokens.add(new Token("OPERATOR", token, lineNumber));
-                } else if (token.matches(REGEX_WHITESPACE)) {
-                    // No hacer nada para espacios en blanco
-                } else if (token.matches(REGEX_COMMENT)) {
-                    tokens.add(new Token("COMMENT", token, lineNumber));
-                } else if (token.matches(REGEX_GROUPING_SYMBOLS)) {
-                    tokens.add(new Token("GROUPING_SYMBOL", token, lineNumber));
-                }else if (token.matches(REGEX_SYMBOLS)) {
-                    tokens.add(new Token("SYMBOL", token, lineNumber));
-                } 
-                
-                else {
-                    tokens.add(new Token("ERROR", token, lineNumber));
+                } else if (!token.matches(REGEX_WHITESPACE)) {  // Ignorar espacios en blanco, pero procesar todo lo demás
+                    if (token.matches(REGEX_COMMENT)) {
+                        tokens.add(new Token("COMMENT", token, lineNumber));
+                    } else if (token.matches(REGEX_GROUPING_SYMBOLS)) {
+                        tokens.add(new Token("GROUPING_SYMBOL", token, lineNumber));
+                    } else if (token.matches(REGEX_SYMBOLS)) {
+                        tokens.add(new Token("SYMBOL", token, lineNumber));
+                    }
                 }
             }
             lineNumber++;
         }
         return tokens;
     }
-
 }

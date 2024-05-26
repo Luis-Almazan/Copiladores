@@ -4,12 +4,9 @@
  */
 package analizadorlexico2.Grafo;
 
-/**
- *
- * @author Luis
- */
-public class AVLTreeWord {
+import analizadorlexico2.Node;
 
+public class AVLTreeWord {
 
     private AVLNodeWord root;
 
@@ -97,6 +94,19 @@ public class AVLTreeWord {
         root = insert(root, word);
     }
 
+    public void insertFromSyntaxTree(Node syntaxTree) {
+        insertFromSyntaxTreeHelper(syntaxTree);
+    }
+
+    private void insertFromSyntaxTreeHelper(Node node) {
+        if (node != null) {
+            insert(node.getValue());
+            for (Node child : node.getChildren()) {
+                insertFromSyntaxTreeHelper(child);
+            }
+        }
+    }
+
     private void inOrderTraversal(AVLNodeWord node) {
         if (node != null) {
             inOrderTraversal(node.getLeft());
@@ -109,7 +119,4 @@ public class AVLTreeWord {
         inOrderTraversal(root);
         System.out.println();
     }
-
-
-    
 }

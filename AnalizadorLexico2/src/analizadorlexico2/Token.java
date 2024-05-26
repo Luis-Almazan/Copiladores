@@ -2,19 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package analizadorlexico2;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-/**
- *
- * @author Luis Almazan
- */
+
 public class Token {
-    private final String type;
-    private final String value;
-    private final int lineNumber;
+    private String type;
+    private String value;
+    private int lineNumber;
 
     public Token(String type, String value, int lineNumber) {
         this.type = type;
@@ -36,6 +30,10 @@ public class Token {
 
     @Override
     public String toString() {
-        return "[" + type + ": " + value + " at line " + lineNumber + "]";
+        return "Token{" +
+                "type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                ", lineNumber=" + lineNumber +
+                '}';
     }
 }

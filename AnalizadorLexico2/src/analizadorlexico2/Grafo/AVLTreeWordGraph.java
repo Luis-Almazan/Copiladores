@@ -3,16 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package analizadorlexico2.Grafo;
+
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-/**
- *
- * @author Luis
- */
-public class AVLTreeWordGraph extends JFrame{
+
+public class AVLTreeWordGraph extends JFrame {
     private AVLNodeWord root;
     private mxGraph graph;
     private Object parent;
@@ -51,5 +49,4 @@ public class AVLTreeWordGraph extends JFrame{
         }
         return v;
     }
-    
 }
